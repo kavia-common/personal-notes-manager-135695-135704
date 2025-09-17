@@ -19,8 +19,13 @@ export default function NotesListScreen({ onOpenNote, onCreateNote, onChangeTab 
   const [query, setQuery] = useState('');
 
   const loadNotes = useCallback(async () => {
-    const all = await listNotes();
-    setNotes(all);
+    try {
+      const all = await listNotes();
+      setNotes(all);
+    } catch (e) {
+      console.warn('Failed to load notes:', e);
+      setNotes([]); // prevent crash/blank UI
+    }
   }, []);
 
   useEffect(() => {

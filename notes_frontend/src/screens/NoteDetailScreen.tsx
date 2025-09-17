@@ -17,13 +17,20 @@ export default function NoteDetailScreen({ noteId, onBack }: Props) {
   useEffect(() => {
     let mounted = true;
     (async () => {
-      if (!isNew && noteId) {
-        const n = await getNote(noteId);
-        if (mounted && n) {
-          setTitle(n.title);
-          setContent(n.content);
+      try {
+        if (!isNew && noteId) {
+          const n = await getNote(noteId);
+          if (mounted && n) {
+            setTitle(n.title);
+            setContent(n.content);
+          }
+        } else {
+          setTitle('');
+          setContent('');
         }
-      } else {
+      } catch (e) {
+        console.warn('Failed to load note:', e);
+        // fall back to empty
         setTitle('');
         setContent('');
       }
