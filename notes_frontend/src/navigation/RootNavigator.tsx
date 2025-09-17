@@ -43,7 +43,14 @@ export default function RootNavigator() {
       case 'settings':
         return <SettingsScreen />;
       default:
-        return null;
+        // Defensive: If route is ever unknown, render list as fallback
+        return (
+          <NotesListScreen
+            onOpenNote={(id) => goTo({ name: 'detail', id })}
+            onCreateNote={() => goTo({ name: 'detail', id: null })}
+            onChangeTab={(k) => goTo(k === 'settings' ? { name: 'settings' } : { name: 'list' })}
+          />
+        );
     }
   }, [route]);
 
