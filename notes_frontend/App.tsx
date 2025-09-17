@@ -1,21 +1,25 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet } from 'react-native';
+import RootNavigator from './src/navigation/RootNavigator';
+import { Colors } from './src/theme';
 
+/**
+ * App entry point for the Notes app following the Ocean Professional style guide.
+ * Renders the RootNavigator that handles the entire flow: list, details, and settings.
+ */
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <StatusBar style="dark" />
+      <RootNavigator />
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: Colors.background,
   },
 });

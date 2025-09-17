@@ -8,12 +8,16 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
     "prebuild:android": "expo prebuild --platform android",
-    "build": "npm run prebuild:android && cd android && ./gradlew assembleDebug"
+    "build:android": "bash ./scripts/guard-gradle.sh assembleDebug",
+    "build": "npm run prebuild:android && npm run build:android"
   },
   "dependencies": {
     "@expo/metro-runtime": "~5.0.4",
     "expo": "~53.0.20",
+    "expo-linear-gradient": "~13.0.2",
+    "expo-sqlite": "~15.0.7",
     "expo-status-bar": "~2.2.3",
     "react": "19.0.0",
     "react-dom": "19.0.0",
